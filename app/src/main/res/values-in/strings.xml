@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Github App</string>
+    <string name="not_found">Data tidak ditemukan</string>
+    <string name="name">Nama</string>
+    <string name="username">Nama pengguna</string>
+    <string name="_123">123</string>
+    <string name="repository">Repositori</string>
+    <string name="followers">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="company">Perusahaan</string>
+    <string name="location">Lokasi</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="search">Cari nama pengguna</string>
+    <string name="github_logo">Github logo</string>
+</resources>

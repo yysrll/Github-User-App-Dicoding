@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Github App</string>
+    <string name="not_found">Data Not Found</string>
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="_123">123</string>
+    <string name="repository">Repository</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="change_language">Change language</string>
+    <string name="search">Search username</string>
+    <string name="github_logo">Github logo</string>
+</resources>
