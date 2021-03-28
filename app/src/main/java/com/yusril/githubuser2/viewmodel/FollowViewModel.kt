@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
+import com.yusril.githubuser2.BuildConfig
 import com.yusril.githubuser2.model.User
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
@@ -14,13 +15,15 @@ import java.lang.Exception
 class FollowViewModel : ViewModel() {
     private val listFollowers = MutableLiveData<ArrayList<User>>()
 
+    companion object {
+        private const val GITHUB_API = BuildConfig.GITHUB_API_KEY
+    }
+
     fun setUser(followUrl: String) {
         val listItems = ArrayList<User>()
 
-        val githubToken = "ab0793b78484cae33d7f0f53b8ec50713921c256"
-
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token $githubToken")
+        client.addHeader("Authorization", "token $GITHUB_API")
         client.addHeader("User-Agent", "request")
         client.get(followUrl, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

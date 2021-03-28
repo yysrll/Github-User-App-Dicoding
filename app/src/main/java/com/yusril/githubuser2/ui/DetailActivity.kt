@@ -59,7 +59,7 @@ class DetailActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(DetailUserViewModel::class.java)
 
-        user.username?.let { detailUserViewModel.setDetailUser(it) }
+        user.detail_url?.let { detailUserViewModel.setDetailUser(it) }
 
         detailUserViewModel.getDetailUser().observe(this, { userDetail ->
             if (userDetail != null) {

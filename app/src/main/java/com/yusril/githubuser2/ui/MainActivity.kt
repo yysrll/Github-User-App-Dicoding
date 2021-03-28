@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             showLoading(false)
-            binding.recycleView.visibility = View.VISIBLE
             adapter.setUser(listItems)
         })
     }

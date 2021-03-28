@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
+import com.yusril.githubuser2.BuildConfig
 import com.yusril.githubuser2.model.DetailUser
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
@@ -14,15 +15,16 @@ import java.lang.Exception
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class DetailUserViewModel : ViewModel() {
 
+    companion object {
+        private const val GITHUB_API = BuildConfig.GITHUB_API_KEY
+    }
+
     private val listDetailUser = MutableLiveData<DetailUser>()
 
-    fun setDetailUser(usernames: String) {
-
-        val githubToken = "ab0793b78484cae33d7f0f53b8ec50713921c256"
-        val url = "https://api.github.com/users/$usernames"
+    fun setDetailUser(url: String) {
 
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token $githubToken")
+        client.addHeader("Authorization", "token $GITHUB_API")
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -67,7 +69,7 @@ class DetailUserViewModel : ViewModel() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                TODO("Not yet implemented")
+                Log.d("onFailure", error?.message.toString())
             }
         })
     }
