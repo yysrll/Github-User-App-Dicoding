@@ -7,7 +7,9 @@ import android.os.Handler
 import com.bumptech.glide.Glide
 import com.yusril.githubuser2.R
 import com.yusril.githubuser2.databinding.ActivitySplashScreenBinding
+import kotlinx.coroutines.InternalCoroutinesApi
 
+@InternalCoroutinesApi
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding

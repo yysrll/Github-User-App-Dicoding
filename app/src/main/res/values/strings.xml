@@ -12,4 +12,8 @@
     <string name="change_language">Change language</string>
     <string name="search">Search username</string>
     <string name="github_logo">Github logo</string>
+    <string name="favorite_button">Favorite Button</string>
+    <string name="favorite">Favorite</string>
+    <string name="insert_success">successfully added to favorites</string>
+    <string name="delete_success">successfully delete user from favorites</string>
 </resources>

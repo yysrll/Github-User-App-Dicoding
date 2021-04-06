@@ -11,5 +11,9 @@
     <string name="location">Lokasi</string>
     <string name="change_language">Ganti Bahasa</string>
     <string name="search">Cari nama pengguna</string>
-    <string name="github_logo">Github logo</string>
+    <string name="github_logo">Logo Github</string>
+    <string name="favorite_button">Tombol Favorit</string>
+    <string name="favorite">Favorite</string>
+    <string name="insert_success">successfully added to favorites</string>
+    <string name="delete_success">successfully delete user from favorites</string>
 </resources>

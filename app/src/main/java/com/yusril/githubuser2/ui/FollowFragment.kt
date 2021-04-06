@@ -12,7 +12,9 @@ import com.yusril.githubuser2.adapter.UserAdapter
 import com.yusril.githubuser2.databinding.FragmentFollowBinding
 import com.yusril.githubuser2.model.User
 import com.yusril.githubuser2.viewmodel.FollowViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
 
+@InternalCoroutinesApi
 class FollowFragment : Fragment() {
 
     private lateinit var adapter: UserAdapter

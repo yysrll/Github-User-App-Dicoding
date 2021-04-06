@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUser2">
+        <activity android:name=".ui.FavoriteActivity" />
         <activity
             android:name=".ui.SplashScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.DetailActivity" />
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

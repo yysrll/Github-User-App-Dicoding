@@ -18,7 +18,9 @@ import com.yusril.githubuser2.adapter.UserAdapter
 import com.yusril.githubuser2.databinding.ActivityMainBinding
 import com.yusril.githubuser2.model.User
 import com.yusril.githubuser2.viewmodel.UserViewModel
+import kotlinx.coroutines.InternalCoroutinesApi
 
+@InternalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -74,9 +76,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.change_language) {
-            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        when(item.itemId) {
+            R.id.change_language -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            R.id.favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
+//        if (item.itemId == R.id.change_language) {
+//            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+//        }
         return super.onOptionsItemSelected(item)
     }
 
