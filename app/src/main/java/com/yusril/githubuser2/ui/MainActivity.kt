@@ -77,12 +77,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.change_language -> startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+            R.id.setting -> startActivity(Intent(this, SettingsActivity::class.java))
             R.id.favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
-//        if (item.itemId == R.id.change_language) {
-//            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-//        }
         return super.onOptionsItemSelected(item)
     }
 
