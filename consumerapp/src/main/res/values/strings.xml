@@ -17,4 +17,5 @@
     <string name="insert_success">successfully added to favorites</string>
     <string name="delete_success">successfully delete user from favorites</string>
     <string name="language">Language</string>
+    <string name="consumerapp">Github Consumer App</string>
 </resources>
