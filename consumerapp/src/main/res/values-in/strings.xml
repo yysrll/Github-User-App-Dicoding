@@ -13,16 +13,8 @@
     <string name="search">Cari nama pengguna</string>
     <string name="github_logo">Logo Github</string>
     <string name="favorite_button">Tombol Favorit</string>
-    <string name="favorite">Favorite</string>
-    <string name="insert_success">successfully added to favorites</string>
-    <string name="delete_success">successfully delete user from favorites</string>
-    <string name="daily_reminder">Pengingat Harian</string>
-    <string name="at_09_00_a_m">at 09:00 a.m</string>
-    <string name="title_activity_settings">Pengaturan</string>
-    <string name="reminder_title">Activate daily reminders</string>
-    <string name="reminder_summary">A reminder will be displayed every 09:00 every day</string>
-    <string name="language">Language</string>
-    <string name="setup_alarm">Repeating alarm set up</string>
-    <string name="alarm_off">Alarm is off</string>
-    <string name="message_reminder">please open the user github application today</string>
+    <string name="favorite">Favorit</string>
+    <string name="insert_success">berhasil ditambahkan ke favorit</string>
+    <string name="delete_success">berhasil menghapus pengguna dari favorit</string>
+    <string name="language">Bahasa</string>
 </resources>
