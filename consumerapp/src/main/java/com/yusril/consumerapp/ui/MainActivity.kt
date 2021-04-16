@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Consumer Github App"
+
         showRecyclerView()
 
         userViewModel = ViewModelProvider(this,
