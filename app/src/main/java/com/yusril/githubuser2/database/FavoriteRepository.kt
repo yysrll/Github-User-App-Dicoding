@@ -1,6 +1,7 @@
 package com.yusril.githubuser2.database
 
 import android.app.Application
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import com.yusril.githubuser2.model.DetailUser
 import com.yusril.githubuser2.model.User
@@ -13,20 +14,20 @@ import kotlinx.coroutines.runBlocking
 class FavoriteRepository(private val application: Application) {
 
     private val favoriteDao: FavoriteDao?
-    private var favorites: LiveData<List<User>>? = null
-    private var favoriteUsername: LiveData<List<User>>? = null
+    private var favorites: Cursor? = null
+    private var favoriteUsername: Cursor? = null
 
     init {
         val db = FavoriteDatabase.getInstance(application.applicationContext)
         favoriteDao = db.favoriteDao()
-        favorites = favoriteDao.getFavorites()
     }
 
-    fun getFavorites(): LiveData<List<User>>? {
+    fun getFavorites(): Cursor? {
+        favorites = favoriteDao?.getFavorites()
         return favorites
     }
 
-    fun getFavoriteByUsername(username: String): LiveData<List<User>>? {
+    fun getFavoriteByUsername(username: String): Cursor? {
         favoriteUsername = favoriteDao?.getFavoriteByUsername(username)
         return favoriteUsername
     }
@@ -37,10 +38,10 @@ class FavoriteRepository(private val application: Application) {
         }
     }
 
-    fun delete(user: User) {
+    fun delete(username: String) {
         runBlocking {
             this.launch(Dispatchers.IO) {
-                favoriteDao?.deleteFavorite(user)
+                favoriteDao?.deleteFavorite(username)
             }
         }
     }

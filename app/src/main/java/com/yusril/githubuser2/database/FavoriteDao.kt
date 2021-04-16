@@ -1,5 +1,6 @@
 package com.yusril.githubuser2.database
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.yusril.githubuser2.model.DetailUser
@@ -8,14 +9,14 @@ import com.yusril.githubuser2.model.User
 @Dao
 interface FavoriteDao {
     @Query("Select * from favorite")
-    fun getFavorites(): LiveData<List<User>>
+    fun getFavorites(): Cursor?
 
     @Query("Select * from favorite where username = :username")
-    fun getFavoriteByUsername(username: String): LiveData<List<User>>?
+    fun getFavoriteByUsername(username: String): Cursor?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorite(user: User)
+    suspend fun insertFavorite(user: User): Long
 
-    @Delete
-    suspend fun deleteFavorite(user: User)
+    @Query("Delete from favorite where username = :username")
+    suspend fun deleteFavorite(username: String): Int
 }

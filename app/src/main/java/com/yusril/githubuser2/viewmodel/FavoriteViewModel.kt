@@ -1,6 +1,7 @@
 package com.yusril.githubuser2.viewmodel
 
 import android.app.Application
+import android.database.Cursor
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -15,14 +16,14 @@ import java.lang.IllegalArgumentException
 class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
 
     private var repository = FavoriteRepository(application)
-    private var favorites: LiveData<List<User>>? = repository.getFavorites()
-    private var favoriteUsername: LiveData<List<User>>? = null
+    private var favorites: Cursor? = repository.getFavorites()
+    private var favoriteUsername: Cursor? = null
 
-    fun getFavorites(): LiveData<List<User>>? {
+    fun getFavorites(): Cursor? {
         return favorites
     }
 
-    fun getFavoriteByUsername(username: String): LiveData<List<User>>? {
+    fun getFavoriteByUsername(username: String): Cursor? {
         favoriteUsername = repository.getFavoriteByUsername(username)
         return favoriteUsername
     }
@@ -31,8 +32,8 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
         repository.insert(user)
     }
 
-    fun deleteFavorite(user: User) {
-        repository.delete(user)
+    fun deleteFavorite(username: String) {
+        repository.delete(username)
     }
 }
 

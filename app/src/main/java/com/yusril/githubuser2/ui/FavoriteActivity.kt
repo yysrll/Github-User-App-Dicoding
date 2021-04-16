@@ -8,8 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yusril.githubuser2.R
 import com.yusril.githubuser2.adapter.UserAdapter
+import com.yusril.githubuser2.database.FavoriteDao
+import com.yusril.githubuser2.database.FavoriteDatabase
 import com.yusril.githubuser2.databinding.ActivityFavoriteBinding
 import com.yusril.githubuser2.model.User
+import com.yusril.githubuser2.util.MappingHelper
 import com.yusril.githubuser2.viewmodel.FavoriteViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -19,6 +22,8 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var adapter: UserAdapter
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var database: FavoriteDatabase
+    private lateinit var dao: FavoriteDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,19 +33,36 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.favorite)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        database = FavoriteDatabase.getInstance(applicationContext)
+        dao = database.favoriteDao()
+
         showLoading(true)
         showRecyclerView()
-        favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-        favoriteViewModel.getFavorites()?.observe(this, { user ->
-            if (user.isNullOrEmpty()) {
-                binding.tvNotFound.visibility = View.VISIBLE
-            } else {
-                binding.tvNotFound.visibility = View.GONE
-            }
+//        favoriteViewModel.getFavorites()?.observe(this, { user ->
+//            if (user.isNullOrEmpty()) {
+//                binding.tvNotFound.visibility = View.VISIBLE
+//            } else {
+//                binding.tvNotFound.visibility = View.GONE
+//            }
+//
+//            showLoading(false)
+//            adapter.setUser(user as ArrayList<User>)
+//        })
+    }
 
-            showLoading(false)
-            adapter.setUser(user as ArrayList<User>)
-        })
+    override fun onResume() {
+        favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        val getFavorite = favoriteViewModel.getFavorites()
+        val userFav = MappingHelper.mapCursorToArrayList(getFavorite)
+        if (userFav.isNullOrEmpty()) {
+            binding.tvNotFound.visibility = View.VISIBLE
+        } else {
+            binding.tvNotFound.visibility = View.GONE
+        }
+
+        showLoading(false)
+        adapter.setUser(userFav)
+        super.onResume()
     }
 
     private fun showRecyclerView() {
@@ -52,7 +74,7 @@ class FavoriteActivity : AppCompatActivity() {
         rv.adapter = adapter
         rv.setHasFixedSize(true)
 
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 showSelectedUser(user)
             }

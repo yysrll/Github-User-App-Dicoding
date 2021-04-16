@@ -14,9 +14,12 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yusril.githubuser2.R
 import com.yusril.githubuser2.adapter.SectionPagerAdapter
+import com.yusril.githubuser2.database.FavoriteDao
+import com.yusril.githubuser2.database.FavoriteDatabase
 import com.yusril.githubuser2.databinding.ActivityDetailBinding
 import com.yusril.githubuser2.model.DetailUser
 import com.yusril.githubuser2.model.User
+import com.yusril.githubuser2.util.MappingHelper.mapCursorToObject
 import com.yusril.githubuser2.viewmodel.DetailUserViewModel
 import com.yusril.githubuser2.viewmodel.FavoriteViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -27,6 +30,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var detailUserViewModel: DetailUserViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var database: FavoriteDatabase
+    private lateinit var dao: FavoriteDao
 
     private var isFavorite: Boolean = false
     private var username = ""
@@ -55,6 +60,10 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.title = username
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        database = FavoriteDatabase.getInstance(applicationContext)
+        dao = database.favoriteDao()
+        favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+
         val sectionsPagerAdapter = SectionPagerAdapter(this)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
@@ -78,7 +87,6 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
-        favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
         btnFavoriteChecked(username)
         binding.btnFavorite.setOnClickListener {
             isFavorite = !isFavorite
@@ -90,14 +98,20 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun btnFavoriteChecked(username: String) {
-        favoriteViewModel.getFavoriteByUsername(username)?.observe(this, { user ->
-
-            if (user.isNotEmpty()) {
-                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-            } else {
-                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-            }
-        })
+//        favoriteViewModel.getFavoriteByUsername(username)?.observe(this, { user ->
+//
+//            if (user.isNotEmpty()) {
+//                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+//            } else {
+//                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+//            }
+//        })
+        isFavorite = (favoriteViewModel.getFavoriteByUsername(username)?.mapCursorToObject() != null)
+        if (isFavorite) {
+            binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+        } else {
+            binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
     }
 
     private fun insertFavorite(user: User) {
@@ -107,7 +121,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun deleteFavorite(user: User) {
-        favoriteViewModel.deleteFavorite(user)
+        favoriteViewModel.deleteFavorite(user.username)
         binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         Toast.makeText(this, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
     }

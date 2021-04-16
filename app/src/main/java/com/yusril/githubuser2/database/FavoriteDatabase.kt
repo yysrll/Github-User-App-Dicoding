@@ -25,7 +25,10 @@ abstract class FavoriteDatabase : RoomDatabase() {
                     context.applicationContext,
                     FavoriteDatabase::class.java,
                     DB_NAME
-                ).build()
+                )
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
 
                 instance
