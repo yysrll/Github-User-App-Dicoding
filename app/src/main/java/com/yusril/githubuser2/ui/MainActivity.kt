@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -34,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         showRecyclerView()
 
-        userViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this,
+            ViewModelProvider.NewInstanceFactory()).get(UserViewModel::class.java)
 
         showLoading(false)
         binding.tvNotfound.visibility = View.VISIBLE
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val searchView = binding.search
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(usernames: String?): Boolean {
 
                 showLoading(true)
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        userViewModel.getUser().observe(this, {listItems ->
+        userViewModel.getUser().observe(this, { listItems ->
             if (listItems.isNullOrEmpty()) {
                 binding.tvNotfound.visibility = View.VISIBLE
             } else {
@@ -76,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.setting -> startActivity(Intent(this, SettingsActivity::class.java))
             R.id.favorite -> startActivity(Intent(this, FavoriteActivity::class.java))
         }
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         rv.adapter = adapter
         rv.setHasFixedSize(true)
 
-        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(user: User) {
                 showSelectedUser(user)
             }

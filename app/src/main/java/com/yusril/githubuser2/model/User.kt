@@ -1,5 +1,6 @@
 package com.yusril.githubuser2.model
 
+import android.content.ContentValues
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -19,5 +20,15 @@ data class User(
     @ColumnInfo(name = "followers_url")
     var followers_url: String?,
     @ColumnInfo(name = "following_url")
-    var following_url: String?
+    var following_url: String?,
 ) : Parcelable
+
+fun fromContentValues(values: ContentValues?): User {
+    return User(
+        values?.getAsString("username") ?: "null",
+        values?.getAsString("avatar") ?: "null",
+        values?.getAsString("detail_url") ?: "null",
+        values?.getAsString("followers_url") ?: "null",
+        values?.getAsString("following_url") ?: "null"
+    )
+}

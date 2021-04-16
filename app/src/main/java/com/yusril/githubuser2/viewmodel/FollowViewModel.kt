@@ -29,7 +29,7 @@ class FollowViewModel : ViewModel() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
-                responseBody: ByteArray?
+                responseBody: ByteArray?,
             ) {
                 try {
                     //parsing json
@@ -43,7 +43,8 @@ class FollowViewModel : ViewModel() {
                         val detailUrl = user.getString("url")
                         val followersUrl = user.getString("followers_url")
                         val followingUrl = "https://api.github.com/users/${username}/following"
-                        val followerItems = User(username, avatar, detailUrl, followersUrl, followingUrl)
+                        val followerItems =
+                            User(username, avatar, detailUrl, followersUrl, followingUrl)
                         listItems.add(followerItems)
                     }
                     listFollowers.postValue(listItems)
@@ -57,7 +58,7 @@ class FollowViewModel : ViewModel() {
                 statusCode: Int,
                 headers: Array<out Header>?,
                 responseBody: ByteArray?,
-                error: Throwable?
+                error: Throwable?,
             ) {
                 Log.d("onFailure", error?.message.toString())
             }

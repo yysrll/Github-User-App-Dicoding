@@ -2,13 +2,8 @@ package com.yusril.githubuser2.database
 
 import android.app.Application
 import android.database.Cursor
-import androidx.lifecycle.LiveData
-import com.yusril.githubuser2.model.DetailUser
 import com.yusril.githubuser2.model.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 @InternalCoroutinesApi
 class FavoriteRepository(private val application: Application) {
@@ -32,17 +27,11 @@ class FavoriteRepository(private val application: Application) {
         return favoriteUsername
     }
 
-    fun insert(user: User) = runBlocking {
-        this.launch(Dispatchers.IO) {
-            favoriteDao?.insertFavorite(user)
-        }
+    fun insert(user: User) {
+        favoriteDao?.insertFavorite(user)
     }
 
     fun delete(username: String) {
-        runBlocking {
-            this.launch(Dispatchers.IO) {
-                favoriteDao?.deleteFavorite(username)
-            }
-        }
+        favoriteDao?.deleteFavorite(username)
     }
 }

@@ -15,8 +15,8 @@ interface FavoriteDao {
     fun getFavoriteByUsername(username: String): Cursor?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorite(user: User): Long
+    fun insertFavorite(user: User): Long
 
     @Query("Delete from favorite where username = :username")
-    suspend fun deleteFavorite(username: String): Int
+    fun deleteFavorite(username: String): Int
 }

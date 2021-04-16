@@ -20,17 +20,17 @@ object MappingHelper {
         return favList
     }
 
-    fun Cursor.mapCursorToObject() : User? {
+    fun Cursor.mapCursorToObject(): User? {
         this.apply {
-            if (moveToFirst()) {
+            return if (moveToFirst()) {
                 val username = getString(getColumnIndexOrThrow("username"))
                 val avatar = getString(getColumnIndexOrThrow("avatar"))
                 val detail_url = getString(getColumnIndexOrThrow("detail_url"))
                 val followers_url = getString(getColumnIndexOrThrow("followers_url"))
                 val following_url = getString(getColumnIndexOrThrow("following_url"))
-                return User(username, avatar, detail_url, followers_url, following_url)
+                User(username, avatar, detail_url, followers_url, following_url)
             } else {
-                return null
+                null
             }
         }
     }

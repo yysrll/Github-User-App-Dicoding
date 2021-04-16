@@ -30,7 +30,7 @@ class DetailUserViewModel : ViewModel() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
-                responseBody: ByteArray?
+                responseBody: ByteArray?,
             ) {
                 try {
                     val result = responseBody?.let { String(it) }
@@ -67,7 +67,7 @@ class DetailUserViewModel : ViewModel() {
                 statusCode: Int,
                 headers: Array<out Header>?,
                 responseBody: ByteArray?,
-                error: Throwable?
+                error: Throwable?,
             ) {
                 Log.d("onFailure", error?.message.toString())
             }

@@ -11,7 +11,7 @@ import kotlinx.coroutines.internal.synchronized
 @Database(entities = [User::class], exportSchema = false, version = 1)
 abstract class FavoriteDatabase : RoomDatabase() {
 
-    abstract fun favoriteDao() : FavoriteDao
+    abstract fun favoriteDao(): FavoriteDao
 
     companion object {
 

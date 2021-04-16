@@ -12,5 +12,5 @@ data class DetailUser(
     var avatar: String?,
     var repository: Int?,
     var followers: Int?,
-    var following: Int?
+    var following: Int?,
 ) : Parcelable

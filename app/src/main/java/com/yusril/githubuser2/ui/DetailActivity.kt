@@ -98,15 +98,8 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun btnFavoriteChecked(username: String) {
-//        favoriteViewModel.getFavoriteByUsername(username)?.observe(this, { user ->
-//
-//            if (user.isNotEmpty()) {
-//                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
-//            } else {
-//                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
-//            }
-//        })
-        isFavorite = (favoriteViewModel.getFavoriteByUsername(username)?.mapCursorToObject() != null)
+        isFavorite =
+            (favoriteViewModel.getFavoriteByUsername(username)?.mapCursorToObject() != null)
         if (isFavorite) {
             binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
         } else {

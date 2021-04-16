@@ -18,6 +18,7 @@ class UserViewModel : ViewModel() {
     companion object {
         private const val GITHUB_API = BuildConfig.GITHUB_API_KEY
     }
+
     private val listUser = MutableLiveData<ArrayList<User>>()
 
     fun setUser(url: String) {
@@ -29,7 +30,7 @@ class UserViewModel : ViewModel() {
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
-                responseBody: ByteArray?
+                responseBody: ByteArray?,
             ) {
                 try {
                     //parsing json
@@ -44,7 +45,8 @@ class UserViewModel : ViewModel() {
                         val detailUrl = user.getString("url")
                         val followersUrl = user.getString("followers_url")
                         val followingUrl = "https://api.github.com/users/${username}/following"
-                        val userItems = User(username, avatar, detailUrl, followersUrl, followingUrl)
+                        val userItems =
+                            User(username, avatar, detailUrl, followersUrl, followingUrl)
                         listItems.add(userItems)
                     }
                     listUser.postValue(listItems)
@@ -57,7 +59,7 @@ class UserViewModel : ViewModel() {
                 statusCode: Int,
                 headers: Array<out Header>?,
                 responseBody: ByteArray?,
-                error: Throwable?
+                error: Throwable?,
             ) {
                 Log.d("onFailure", error?.message.toString())
             }
